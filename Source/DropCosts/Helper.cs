@@ -39,7 +39,7 @@ namespace DropCosts {
         public static void SaveState(string instanceGUID, DateTime saveTime) {
             try {
                 int unixTimestamp = (int)(saveTime.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                string filePath = $"{DropCosts.ModDirectory}/saves/" + instanceGUID + "-" + unixTimestamp + ".json";
+                string filePath = $"{DropCosts.ModDirectory}/SaveState/" + instanceGUID + "-" + unixTimestamp + ".json";
                 (new FileInfo(filePath)).Directory.Create();
                 using (StreamWriter writer = new StreamWriter(filePath, true)) {
                     SaveFields fields = new SaveFields(Fields.DropCost, Fields.LanceTonnage, Fields.FormattedDropCost, Fields.FreeTonnageText);
@@ -55,7 +55,7 @@ namespace DropCosts {
         public static void LoadState(string instanceGUID, DateTime saveTime) {
             try {
                 int unixTimestamp = (int)(saveTime.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                string filePath = $"{DropCosts.ModDirectory}/saves/" + instanceGUID + "-" + unixTimestamp + ".json";
+                string filePath = $"{DropCosts.ModDirectory}/SaveState/" + instanceGUID + "-" + unixTimestamp + ".json";
                 if (File.Exists(filePath)) {
                     using (StreamReader r = new StreamReader(filePath)) {
                         string json = r.ReadToEnd();
