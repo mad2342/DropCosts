@@ -1,4 +1,5 @@
 ﻿using BattleTech;
+using BattleTech.Framework;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -97,6 +98,29 @@ namespace DropCosts {
             }
             currentCBillValue = Mathf.Round(currentCBillValue / num) * num;
             return currentCBillValue;
+        }
+
+        public static bool missionRestrictionsActive(ContractOverride contractOverride)
+        {
+            if (contractOverride.lanceMaxTonnage > 0 || contractOverride.lanceMinTonnage > 0)
+            {
+                return true;
+            }
+            foreach (float restriction in contractOverride.mechMaxTonnages)
+            {
+                if (restriction > 0)
+                {
+                    return true;
+                }
+            }
+            foreach (float restriction in contractOverride.mechMinTonnages)
+            {
+                if (restriction > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

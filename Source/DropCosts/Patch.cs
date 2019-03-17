@@ -68,6 +68,15 @@ namespace DropCosts {
                 Settings settings = Helper.LoadSettings();
                 LanceConfiguratorPanel LC = (LanceConfiguratorPanel)ReflectionHelper.GetPrivateField(__instance, "LC");
 
+                // Fix for normal contracts with restrictions set:
+                // Only display/set if there are no tonnage restrictions set by the mission itself
+                if (Helper.missionRestrictionsActive(LC.activeContract.Override))
+                {
+                    // To disable display in mission results this needs to be 0
+                    Fields.DropCost = 0;
+                    return;
+                }
+
                 if (LC.IsSimGame) {
                     int lanceTonnage = 0;
                     float dropCost = 0f;
@@ -77,7 +86,8 @@ namespace DropCosts {
 
                     if (settings.useFreeTonnageByDifficulty)
                     {
-                        int difficulty = LC.activeContract.Difficulty;
+                        //int difficulty = LC.activeContract.Difficulty;
+                        int difficulty = LC.activeContract.Override.GetUIDifficulty();
                         if (difficulty < 1)
                         {
                             difficulty = 1;
@@ -125,6 +135,7 @@ namespace DropCosts {
 
                     TextMeshProUGUI simLanceTonnageText = (TextMeshProUGUI)ReflectionHelper.GetPrivateField(__instance, "simLanceTonnageText");
                     // Fix for FP
+                    simLanceTonnageText.enableAutoSizing = false;
                     simLanceTonnageText.enableWordWrapping = false;
                     // longer strings interfere with messages about incorrect lance configurations
                     simLanceTonnageText.text = $"DROP COST: ¢{Fields.FormattedDropCost}   LANCE WEIGHT: {Fields.LanceTonnage}/{Fields.FreeTonnageText}";
