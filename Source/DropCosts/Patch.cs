@@ -86,8 +86,10 @@ namespace DropCosts {
 
                     if (settings.useFreeTonnageByDifficulty)
                     {
-                        //int difficulty = LC.activeContract.Difficulty;
-                        int difficulty = LC.activeContract.Override.GetUIDifficulty();
+                        // This can turn out to be too nasty
+                        //int difficulty = LC.activeContract.Override.GetUIDifficulty();
+
+                        int difficulty = LC.activeContract.Difficulty;
                         if (difficulty < 1)
                         {
                             difficulty = 1;
