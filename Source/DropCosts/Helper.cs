@@ -1,9 +1,7 @@
-﻿using BattleTech;
-using BattleTech.Framework;
+﻿using BattleTech.Framework;
 using Newtonsoft.Json;
 using System;
 using System.IO;
-using UnityEngine;
 
 namespace DropCosts
 {
@@ -14,7 +12,7 @@ namespace DropCosts
             try
             {
                 int unixTimestamp = (int)(saveTime.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                string filePath = $"{DropCosts.ModDirectory}/SaveState/" + instanceGUID + "-" + unixTimestamp + ".json";
+                string filePath = $"{DropCosts.ModDirectory}/.savestate/" + instanceGUID + "-" + unixTimestamp + ".json";
                 (new FileInfo(filePath)).Directory.Create();
                 using (StreamWriter writer = new StreamWriter(filePath, true))
                 {
@@ -25,7 +23,7 @@ namespace DropCosts
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex);
+                Logger.Error(ex);
             }
         }
 
@@ -34,7 +32,7 @@ namespace DropCosts
             try
             {
                 int unixTimestamp = (int)(saveTime.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                string filePath = $"{DropCosts.ModDirectory}/SaveState/" + instanceGUID + "-" + unixTimestamp + ".json";
+                string filePath = $"{DropCosts.ModDirectory}/.savestate/" + instanceGUID + "-" + unixTimestamp + ".json";
                 if (File.Exists(filePath))
                 {
                     using (StreamReader r = new StreamReader(filePath))
@@ -49,7 +47,7 @@ namespace DropCosts
                 }
             }
             catch (Exception ex) {
-                Logger.LogError(ex);
+                Logger.Error(ex);
             }
         }
 

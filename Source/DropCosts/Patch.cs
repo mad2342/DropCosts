@@ -47,7 +47,7 @@ namespace DropCosts
             }
             catch (Exception e)
             {
-                Logger.LogError(e);
+                Logger.Error(e);
             }
         }
     }
@@ -64,7 +64,7 @@ namespace DropCosts
             }
             catch (Exception e)
             {
-                Logger.LogError(e);
+                Logger.Error(e);
             }
         }
     }
@@ -146,7 +146,7 @@ namespace DropCosts
             }
             catch (Exception e)
             {
-                Logger.LogError(e);
+                Logger.Error(e);
             }
         }
     }

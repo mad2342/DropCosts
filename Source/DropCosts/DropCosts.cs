@@ -28,7 +28,7 @@ namespace DropCosts
             catch (Exception e)
             {
                 Settings = new Settings();
-                Logger.LogError(e);
+                Logger.Error(e);
             }
 
             HarmonyInstance harmony = HarmonyInstance.Create("de.mad.DropCosts");
