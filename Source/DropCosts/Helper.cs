@@ -75,5 +75,16 @@ namespace DropCosts
             }
             return false;
         }
+
+
+
+        public static bool ContractOnExcludeList(ContractOverride contractOverride)
+        {
+            if (DropCosts.Settings.ContractExcludeList.Contains(contractOverride.ID))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

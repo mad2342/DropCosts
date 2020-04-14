@@ -79,7 +79,8 @@ namespace DropCosts
 
                 // Fix for normal contracts with restrictions set:
                 // Only display/set if there are no tonnage restrictions set by the mission itself
-                if (Helper.MissionRestrictionsActive(LC.activeContract.Override))
+                // Also checking for special flashpoint contracts where DropCosts wouldn't make sense
+                if (Helper.MissionRestrictionsActive(LC.activeContract.Override) || Helper.ContractOnExcludeList(LC.activeContract.Override))
                 {
                     // To disable display in mission results this needs to be 0
                     Fields.DropCost = 0;
